@@ -1,6 +1,0 @@
-<div x-id=\"
-\" x-data=\"
-\" class=\"
-\"
->
-</div>

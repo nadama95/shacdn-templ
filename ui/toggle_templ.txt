@@ -1,9 +1,0 @@
-<button type=\"button\" x-data :aria-pressed=\"
-\" :data-state=\"
-\"
- data-disabled
- x-on:click=\"
-\" class=\"
-\"
->
-</button>

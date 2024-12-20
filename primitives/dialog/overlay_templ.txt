@@ -1,6 +1,0 @@
-<div :data-state=\"
-\" x-show=\"
-\" x-cloak style=\"pointer-events: auto;\" class=\"
-\"
->
-</div>

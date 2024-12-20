@@ -1,9 +1,0 @@
-<div class=\"
-\"
- x-data=\"
-\" :data-state=\"shadcntempl_open ? &#39;open&#39; : &#39;closed&#39;\" :data-disabled=\"shadcntempl_disabled\">
-</div>
-<div x-data x-show=\"shadcntempl_open\" :data-state=\"shadcntempl_open ? &#39;open&#39; : &#39;closed&#39;\" :data-disabled=\"shadcntempl_disabled\" class=\"
-\"
->
-</div>
