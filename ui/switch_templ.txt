@@ -1,0 +1,16 @@
+<button x-data=\"
+\" class=\"
+\" type=\"button\" role=\"switch\" :aria-checked=\"shadcntempl_checked\" aria-required=\"
+\" :data-state=\"shadcntempl_checked ? &#39;checked&#39; : &#39;unchecked&#39;\"
+ data-disabled disabled
+ x-on:keydown.enter.prevent=\"\" x-on:click=\"shadcntempl_checked = ! shadcntempl_checked\">
+<input x-data type=\"checkbox\" aria-hidden x-model=\"shadcntempl_checked\" tabindex=\"-1\" name=\"
+\"
+ required
+ disabled
+ class=\"opacity-0 m-0 absolute pointer-events-none\"
+></button>
+<span x-data :data-state=\"shadcntempl_checked ? &#39;checked&#39; : &#39;unchecked&#39;\"
+ data-disabled
+ class=\"
+\"></span>

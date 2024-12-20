@@ -1,0 +1,154 @@
+package ui
+
+import twmerge "github.com/Oudwins/tailwind-merge-go"
+
+const (
+	sidebarOverlayBaseClass = "group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar"
+
+	sidebarBaseClass          = "flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+	sidebarGapBaseClass       = "duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180"
+	sidebarGapParentBaseClass = "group peer hidden md:block text-sidebar-foreground"
+	sidebarParentBaseClass    = "duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex"
+
+	sidebarHeaderBaseClass = "flex flex-col gap-2 p-2"
+	sidebarFooterBaseClass = "flex flex-col gap-2 p-2"
+
+	sidebarContentBaseClass      = "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden"
+	sidebarGroupBaseClass        = "duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0"
+	sidebarGroupContentBaseClass = "w-full text-sm"
+
+	sidebarMenuBaseClass     = "flex w-full min-w-0 flex-col gap-1"
+	sidebarMenuItemBaseClass = "group/menu-item relative"
+)
+
+templ SidebarOverlay(classes string, attrs templ.Attributes) {
+	<div style="--sidebar-width:16rem;--sidebar-width-icon:3rem" class={ twmerge.Merge(sidebarOverlayBaseClass, classes) } { attrs... }>
+		{ children... }
+	</div>
+}
+
+type SidebarSide int
+
+const (
+	SidebarSideLeft SidebarSide = iota
+	SidebarSideRight
+)
+
+func (s SidebarSide) Class() string {
+	switch s {
+	case SidebarSideLeft:
+		return "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
+	case SidebarSideRight:
+		return "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]"
+	default:
+		return ""
+	}
+}
+
+func (s SidebarSide) String() string {
+	switch s {
+	case SidebarSideLeft:
+		return "left"
+	case SidebarSideRight:
+		return "right"
+	default:
+		return ""
+	}
+}
+
+type SidebarVariant int
+
+const (
+	SidebarVariantSidebar SidebarVariant = iota
+	SidebarVariantFloating
+	SidebarVariantInset
+)
+
+func (v SidebarVariant) Class() string {
+	switch v {
+	case SidebarVariantSidebar:
+		return "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l"
+	default:
+		// Floating or Inset
+		return "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
+	}
+}
+
+func (v SidebarVariant) GapClass() string {
+	switch v {
+	case SidebarVariantSidebar:
+		return "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
+	default:
+		// Floating or Inset
+		return "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
+	}
+
+}
+
+func (v SidebarVariant) String() string {
+	switch v {
+	case SidebarVariantSidebar:
+		return "sidebar"
+	case SidebarVariantFloating:
+		return "floating"
+	case SidebarVariantInset:
+		return "inset"
+	default:
+		return ""
+	}
+}
+
+templ Sidebar(side SidebarSide, variant SidebarVariant, attrs templ.Attributes) {
+	<div class={ sidebarGapParentBaseClass } data-variant={ variant.String() } data-side={ side.String() }>
+		<div class={ twmerge.Merge(sidebarGapBaseClass, variant.GapClass()) }></div>
+		<div class={ twmerge.Merge(sidebarParentBaseClass, side.Class(), variant.Class()) } { attrs... }>
+			<div data-sidebar="sidebar" class={ sidebarBaseClass }>
+				{ children... }
+			</div>
+		</div>
+	</div>
+}
+
+templ SidebarHeader(classes string, attrs templ.Attributes) {
+	<div data-sidebar="header" class={ twmerge.Merge(sidebarHeaderBaseClass, classes) } { attrs... }></div>
+}
+
+templ SidebarFooter(classes string, attrs templ.Attributes) {
+	<div data-sidebar="footer" class={ twmerge.Merge(sidebarFooterBaseClass, classes) } { attrs... }></div>
+}
+
+templ SidebarContent(classes string, attrs templ.Attributes) {
+	<div data-sidebar="content" class={ twmerge.Merge(sidebarContentBaseClass, classes) } { attrs... }>
+		{ children... }
+	</div>
+}
+
+templ SidebarGroup(classes string, attrs templ.Attributes) {
+	<div data-sidebar="group-label" class={ twmerge.Merge(sidebarGroupBaseClass, classes) }>
+		{ children... }
+	</div>
+}
+
+templ SidebarGroupContent(classes string, attrs templ.Attributes) {
+	<div data-sidebar="group-content" class={ twmerge.Merge(sidebarGroupContentBaseClass, classes) } { attrs... }>
+		{ children... }
+	</div>
+}
+
+templ SidebarMenu(classes string, attrs templ.Attributes) {
+	<ul data-sidebar="menu" class={ twmerge.Merge(sidebarMenuBaseClass, classes) } { attrs... }>
+		{ children... }
+	</ul>
+}
+
+templ SidebarMenuItem(classes string, attrs templ.Attributes) {
+	<li data-sidebar="menu-item" class={ twmerge.Merge(sidebarMenuItemBaseClass, classes) } { attrs... }>
+		{ children... }
+	</li>
+}
+
+templ SidebarMenuButton() {
+	<div class="peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0">
+		{ children... }
+	</div>
+}

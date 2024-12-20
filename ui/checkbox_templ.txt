@@ -1,0 +1,11 @@
+<button x-data=\"{ checked: false }\" type=\"button\" role=\"checkbox\" :aria-checked=\"checked\"
+ aria-required
+ :data-state=\"checked ? &#39;checked&#39; : &#39;unchecked&#39;\"
+ aria-disabled
+ x-on:keydown.enter.prevent=\"\" x-on:click=\"checked = ! checked\" class=\"
+\"><input type=\"checkbox\" name=\"
+\" aria-hidden tabindex=\"-1\" class=\"absolute h-0 w-0 opacity-0\" x-model=\"checked\"
+> <span x-data class=\"pointer-events-none flex items-center justify-center text-current\" :data-state=\"checked ? &#39;checked&#39; : &#39;unchecked&#39;\"
+ aria-disabled
+ x-show=\"checked\" x-cloak>
+</span></button>

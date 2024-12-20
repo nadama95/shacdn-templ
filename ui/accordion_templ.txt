@@ -1,0 +1,19 @@
+<div class=\"
+\"
+ x-data=\"{ current: &#39;&#39; }\">
+</div>
+<div class=\"
+\"
+ x-id=\"[&#39;accordion-item&#39;]\">
+</div>
+<h3 class=\"flex\">
+<button class=\"
+\"
+ @click=\"current = current === $id(&#39;accordion-item&#39;) ? &#39;&#39; : $id(&#39;accordion-item&#39;)\" :class=\"current === $id(&#39;accordion-item&#39;) &amp;&amp; &#39;[&amp;&gt;svg]:rotate-180&#39;\">
+</button></h3>
+<div class=\"
+\"
+ x-show=\"current === $id(&#39;accordion-item&#39;)\" x-collapse x-cloak>
+<div class=\"
+\">
+</div></div>

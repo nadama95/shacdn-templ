@@ -1,0 +1,29 @@
+<div class=\"
+\"
+ x-data=\"{ shadcntempl_open: false }\">
+</div>
+<div class=\"
+\" x-cloak x-show=\"shadcntempl_open\" aria-hidden=\"true\" x-transition:enter=\"animate-in fade-in-0\" x-transition:leave=\"animate-out fade-out-0\"></div>
+<div class=\"
+\" x-cloak x-show=\"shadcntempl_open\" x-on:mousedown.outside=\"shadcntempl_open = false\" x-trap.inert.noscroll=\"shadcntempl_open\" x-on:keydown.esc.window=\"shadcntempl_open = false\" role=\"dialog\" aria-modal=\"true\" x-transition:enter=\"animate-in fade-in-0 zoom-in-95 slide-in-from-top-[48%] slide-in-from-left-1/2\" x-transition:leave=\"animate-out fade-out-0 zoom-out-95 slide-out-to-top-[48%] slide-out-to-left-1/2\"
+>
+<button type=\"button\" class=\"
+\"
+>
+<span class=\"sr-only\">Close</span></button></div>
+<div class=\"
+\"
+>
+</div>
+<div class=\"
+\"
+>
+</div>
+<h2 class=\"
+\"
+>
+</h2>
+<p class=\"
+\"
+>
+</p>
