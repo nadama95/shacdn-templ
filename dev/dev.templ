@@ -1,0 +1,54 @@
+package main
+
+import ("github.com/rotemhoresh/shadcn-templ/ui")
+
+templ Base() {
+    <html lang="en" class="dark" style="color-scheme: dark;">
+    <head>
+        @Head()
+
+        <link rel="stylesheet" href="/static/css/output.css"/>
+    </head>
+    <body class="min-h-svh bg-background font-sans antialiased">
+    { children... }
+    </body>
+    </html>
+}
+
+// Tags to include in the head of your page.
+templ Head() {
+	// Alpine.js
+	<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	// Dark mode
+	<script>
+	  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  		document.documentElement.classList.add('dark');
+		} else {
+  		document.documentElement.classList.remove('dark');
+		}
+	</script>
+}
+
+
+templ Dev() {
+    @Base() {
+        @ui.Sidebar(ui.SidebarSideLeft, ui.SidebarVariantSidebar, templ.Attributes{}) {
+            @ui.SidebarHeader("", templ.Attributes{})
+            @ui.SidebarContent("", templ.Attributes{}) {
+                @ui.SidebarGroup("", templ.Attributes{}) {
+                    @ui.SidebarGroupContent("", templ.Attributes{}) {
+                        @ui.SidebarMenu("", templ.Attributes{}) {
+                            @ui.SidebarMenuItem("", templ.Attributes{}) {
+                                @ui.SidebarMenuButton() {
+                                    Test
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

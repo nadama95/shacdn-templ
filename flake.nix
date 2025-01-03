@@ -17,9 +17,14 @@
 
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
+          delve
           go
-          yarn-berry
+          gopls
+          gotests
+          go-tools
           (templ system)
+
+          nodejs
         ];
       };
     };
